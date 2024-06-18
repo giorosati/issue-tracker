@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = "mysql://root:giodev2024@localhost:3306/issue-tracker"
 }
 
 model Issue {
