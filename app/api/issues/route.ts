@@ -2,14 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 //original code
-// import prisma from "@prisma/client";
+import prisma from "@prisma/client";
 
 // new code
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 
 const createIssueSchema = z.object({
   title: z.string().min(1).max(255),
   description: z.string().min(1),
+  notes: z.string().min(1),
 });
 
 export async function POST(request: NextRequest) {
@@ -21,9 +22,19 @@ export async function POST(request: NextRequest) {
 
   try {
     // check prisma object
-    console.log("Prisma instance:", prisma);
+    // console.log("Prisma instance:", prisma);
+
+    // check data
+    console.log("title: ", body.title);
+    console.log("description: ", body.description);
+    console.log("notes: ", body.notes);
+
     const newIssue = await prisma.issue.create({
-      data: { title: body.title, description: body.description },
+      data: {
+        title: body.title,
+        description: body.description,
+        notes: body.notes,
+      },
     });
 
     return NextResponse.json(newIssue, { status: 201 });

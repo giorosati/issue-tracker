@@ -17,6 +17,7 @@ model Issue {
   id          Int      @id @default(autoincrement())
   title       String   @db.VarChar(255) // varchar(191)
   description String   @db.Text
+  notes       String   @db.Text  //new field added 
   status      Status   @default(OPEN)
   createdAt   DateTime @default(now())
   updatedAT   DateTime @updatedAt
