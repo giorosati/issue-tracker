@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 //original code
-import prisma from "@prisma/client";
+// import prisma from "@prisma/client";
 
 // new code
-// import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 const createIssueSchema = z.object({
   title: z.string().min(1).max(255),
