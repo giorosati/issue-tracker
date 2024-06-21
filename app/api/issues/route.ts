@@ -8,11 +8,7 @@ import { z } from "zod";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-const createIssueSchema = z.object({
-  title: z.string().min(1, "Title is required").max(255),
-  description: z.string().min(1, "Description is required"),
-  notes: z.string().min(1, "Notes are required"),
-});
+import { createIssueSchema } from "./validationSchemas";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
