@@ -12,6 +12,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
+import ErrorMessage from "@/app/components/ErrorMessage";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
@@ -63,11 +64,9 @@ const NewIssuePage = () => {
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </div>
-        {errors.title && (
-          <Text color="red" as="p">
-            {errors.title.message}
-          </Text>
-        )}
+
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
+
         <div>
           <label htmlFor="notes">notes</label>
           <input
@@ -77,11 +76,9 @@ const NewIssuePage = () => {
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </div>
-        {errors.notes && (
-          <Text color="red" as="p">
-            {errors.notes.message}
-          </Text>
-        )}
+
+        <ErrorMessage>{errors.notes?.message}</ErrorMessage>
+
         {/* <TextField.Root placeholder="Title">
         <TextField.Slot {...register("title")} />
       </TextField.Root> */}
@@ -92,11 +89,7 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder="Description" {...field} />
           )}
         />
-        {errors.description && (
-          <Text color="red" as="p">
-            {errors.description.message}
-          </Text>
-        )}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button>Submit New Issue</Button>
       </form>
     </div>
