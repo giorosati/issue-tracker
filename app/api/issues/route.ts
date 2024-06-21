@@ -18,14 +18,6 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    // check prisma object
-    // console.log("Prisma instance:", prisma);
-
-    // check data
-    // console.log("title: ", body.title);
-    // console.log("description: ", body.description);
-    // console.log("notes: ", body.notes);
-
     const newIssue = await prisma.issue.create({
       data: {
         title: body.title,

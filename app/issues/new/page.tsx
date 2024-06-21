@@ -1,6 +1,5 @@
 "use client";
-// import { TextField } from "@radix-ui/themes";
-// import { TextArea } from "@radix-ui/themes";
+
 import { Button, Text } from "@radix-ui/themes";
 import { Callout } from "@radix-ui/themes";
 import SimpleMDE from "react-simplemde-editor";
@@ -13,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
-// import { Spinner } from "@/app/components/Spinner";
+import Spinner from "@/app/components/Spinner";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
@@ -73,9 +72,6 @@ const NewIssuePage = () => {
 
         <ErrorMessage>{errors.notes?.message}</ErrorMessage>
 
-        {/* <TextField.Root placeholder="Title">
-        <TextField.Slot {...register("title")} />
-      </TextField.Root> */}
         <Controller
           name="description"
           control={control}
@@ -88,8 +84,7 @@ const NewIssuePage = () => {
 
         <Button disabled={isSubmitting}>
           Submit New Issue
-          {/* Spinner causes error */}
-          {/* {isSubmitting && <Spinner /> */}
+          {isSubmitting && <Spinner />}
         </Button>
       </form>
     </div>
