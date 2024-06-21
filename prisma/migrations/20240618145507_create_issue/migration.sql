@@ -2,6 +2,7 @@
 CREATE TABLE `Issue` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(255) NOT NULL,
+    'notes' TEXT,
     `description` TEXT NOT NULL,
     `status` ENUM('OPEN', 'IN_PROGESS', 'CLOSED') NOT NULL DEFAULT 'OPEN',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
