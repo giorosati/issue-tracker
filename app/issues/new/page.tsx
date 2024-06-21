@@ -17,14 +17,6 @@ import ErrorMessage from "@/app/components/ErrorMessage";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
-// interface IssueForm {
-//   title: string;
-//   notes: string;
-//   description: string;
-// }
-
-// import React from "react";
-
 const NewIssuePage = () => {
   const router = useRouter();
   const {
@@ -37,6 +29,16 @@ const NewIssuePage = () => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setSubmitting(true);
+      await axios.post("/api/issues", data);
+      router.push("/issues");
+    } catch (error) {
+      setSubmitting(false);
+      setError("An unexpected error occurred.");
+    }
+  });
 
   return (
     <div className=" max-w-xl ">
@@ -46,19 +48,7 @@ const NewIssuePage = () => {
         </Callout.Root>
       )}
 
-      <form
-        className=" space-y-3 "
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            setSubmitting(true);
-            await axios.post("/api/issues", data);
-            router.push("/issues");
-          } catch (error) {
-            setSubmitting(false);
-            setError("An unexpected error occurred.");
-          }
-        })}
-      >
+      <form className=" space-y-3 " onSubmit={onSubmit}>
         <div>
           <label htmlFor="title">Title</label>
           <input
